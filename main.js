@@ -167,25 +167,38 @@ function checkSquare(square, id) {
             let newsq = document.getElementById(newid);
             click(newsq);
         }
-    },10)
+    },50)
 }
 
 
 function gameOver(square)
 {
     isGameover=1;
-    alert("game over");
+    bombind = square.id;
+
+    square.innerHTML = '💣';
+    let ind = Math.floor(Math.random()*6);
+    document.getElementById(square.getAttribute('id')).style.backgroundColor = colorsbomb[ind];
+
     for(let i=0;i<squares.length;i++)
     {
-        if(squares[i].classList.contains('bomb'))
+        setTimeout(()=>{
+        if(squares[i].classList.contains('bomb') && i!=bombind)
         {
+           
             squares[i].innerHTML = '💣';
 
             let ind = Math.floor(Math.random()*6);
 
             document.getElementById(squares[i].getAttribute('id')).style.backgroundColor = colorsbomb[ind];
-        }
+           
+
+        }},i*30);
     }
+    setTimeout(()=>
+    {alert("game over");}
+    ,squares.length*30);
+
 }
 
 function addFlag(square)
@@ -225,3 +238,14 @@ function checkWin()
         }
     }
 }
+
+
+
+//custom made sleep as js don't have any :)
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
