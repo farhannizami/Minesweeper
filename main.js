@@ -5,6 +5,8 @@ let bombamount = 20;
 let isGameover = 0;
 let flag =0;
 
+let colorsbomb = ['red','green','blue','orange', 'yellow', 'pink'];
+
 function createBoard() {
 
     const bombs = Array(bombamount).fill('bomb');
@@ -17,6 +19,7 @@ function createBoard() {
 
         square.setAttribute('id', i); // setting id numerically
         square.classList.add(totarray[i]);
+        
 
         grid.appendChild(square); // adding sq to grid
         squares.push(square);
@@ -175,7 +178,11 @@ function gameOver(square)
     {
         if(squares[i].classList.contains('bomb'))
         {
-            squares[i].innerHTML = '💣'
+            squares[i].innerHTML = '💣';
+
+            let ind = Math.floor(Math.random()*6);
+
+            document.getElementById(squares[i].getAttribute('id')).style.backgroundColor = colorsbomb[ind];
         }
     }
 }

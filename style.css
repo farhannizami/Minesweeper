@@ -1,10 +1,11 @@
 .grid
 {
-    height: 400px;
-    width: 400px;
+    height: 420px;
+    width: 420px;
     display: flex;
     flex-wrap: wrap;
-    background-color: grey;
+    /*background-color: grey;*/
+    background-color: rgb(170,215,81);
 }
 
 .grid div
@@ -12,13 +13,21 @@
     height: 40px;
     width: 40px;
     /*background-color: red;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: blue;
 }
 
 .bomb
 {
-    background-color: orange;
+    
 }
 .checked
 {
-    background-color: red;
+    /*background-color: white;*/
+    background-color: rgb(229,194,159);
 }
