@@ -1,4 +1,4 @@
-const grid = document.querySelector('.grid');
+const grid = document.querySelector('.gridgg');
 let width = 10;
 let squares = [];
 let bombamount = 20;
@@ -19,6 +19,7 @@ function createBoard() {
 
         square.setAttribute('id', i); // setting id numerically
         square.classList.add(totarray[i]);
+        square.classList.add('cell');
         
 
         grid.appendChild(square); // adding sq to grid

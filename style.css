@@ -1,4 +1,4 @@
-.grid
+.gridgg
 {
     height: 420px;
     width: 420px;
@@ -8,10 +8,11 @@
     background-color: rgb(170,215,81);
 }
 
-.grid div
+
+.cell
 {
-    height: 40px;
-    width: 40px;
+    height: 42px;
+    width: 42px;
     /*background-color: red;*/
     border-style: solid;
     border-width: 1px;
@@ -30,4 +31,22 @@
 {
     /*background-color: white;*/
     background-color: rgb(229,194,159);
+}
+
+.centerdiv
+{
+    
+    width:420px;
+    height:420px;
+
+ /* The magic centering code */
+    margin:auto;
+    position:absolute;
+    top:0;bottom:0; /* Aligns Vertically - Remove for Horizontal Only */
+    left:0;right:0; /* Aligns Horizontally - Remove for Vertical Only  */
+
+ /* Prevent div from overflowing main window */
+    max-width:100%;
+    max-height:100%;
+    overflow:auto;
 }
