@@ -1,7 +1,7 @@
 const grid = document.querySelector('.gridgg');
 let width = 10;
 let squares = [];
-let bombamount = 20;
+let bombamount = 15;
 let isGameover = 0;
 let flag =0;
 
@@ -20,6 +20,12 @@ function createBoard() {
         square.setAttribute('id', i); // setting id numerically
         square.classList.add(totarray[i]);
         square.classList.add('cell');
+        
+
+        let row = Math.floor(i/10);
+        let col = i%10;
+        if((row+col)%2==1) square.classList.add('odd');
+        else square.classList.add('even');
         
 
         grid.appendChild(square); // adding sq to grid
@@ -63,7 +69,7 @@ function createBoard() {
 
 
             squares[i].setAttribute('data', total);
-            console.log(squares[i]);
+            //console.log(squares[i]);
         }
     }
 }
@@ -86,6 +92,14 @@ function click(square) {
             square.classList.add('checked');
             //console.log(square);
             square.innerHTML = tot;
+            if(tot==1) document.getElementById(square.id).style.color = 'blue';
+            else if(tot==2) document.getElementById(square.id).style.color = 'darkgreen';
+            else if(tot==3) document.getElementById(square.id).style.color = 'red';
+            else if(tot==4) document.getElementById(square.id).style.color = 'purple';
+            else if(tot==5) document.getElementById(square.id).style.color = 'maroon';
+            else if(tot==6) document.getElementById(square.id).style.color = 'turquoise';
+            else if(tot==7) document.getElementById(square.id).style.color = 'black';
+            else document.getElementById(square.id).style.color = 'gray';
             return;
         }
        checkSquare(square,parseInt(id));
@@ -191,7 +205,7 @@ function gameOver(square)
             let ind = Math.floor(Math.random()*6);
 
             document.getElementById(squares[i].getAttribute('id')).style.backgroundColor = colorsbomb[ind];
-           
+            document.getElementById(squares[i].getAttribute('id')).style.borderColor = colorsbomb[ind];
 
         }},i*30);
     }
@@ -235,6 +249,7 @@ function checkWin()
         {
             alert('Won'); 
             isGameover=1;
+            break;
         }
     }
 }

@@ -5,7 +5,7 @@
     display: flex;
     flex-wrap: wrap;
     /*background-color: grey;*/
-    background-color: rgb(170,215,81);
+    /* background-color: rgb(170,215,81); */
 }
 
 
@@ -13,14 +13,38 @@
 {
     height: 42px;
     width: 42px;
-    /*background-color: red;*/
+    /* background-color: red; */
     border-style: solid;
     border-width: 1px;
     border-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: blue;
+    /* color: blue; */
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.odd
+{
+    background-color: rgb(162,209,73);
+    border-color:rgb(162,209,73);
+}
+.even
+{
+    background-color: rgb(170,215,81);
+    border-color: rgb(170,215,81);
+}
+
+.even.checked
+{
+    background-color: rgb(229,194,159);
+    border-color: rgb(229,194,159);
+}
+.odd.checked
+{
+    background-color: rgb(215,184,153);
+    border-color: rgb(215,184,153);
 }
 
 .bomb
@@ -30,7 +54,7 @@
 .checked
 {
     /*background-color: white;*/
-    background-color: rgb(229,194,159);
+    /* background-color: rgb(229,194,159); */
 }
 
 .centerdiv
