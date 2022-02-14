@@ -7,6 +7,11 @@ let flag = 0;
 
 let colorsbomb = ['red', 'green', 'blue', 'orange', 'yellow', 'purple','cyan'];
 
+let isStarted=0;
+let startTime;
+let curTime;
+
+
 function createBoard() {
 
     const bombs = Array(bombamount).fill('bomb');
@@ -34,11 +39,21 @@ function createBoard() {
 
         square.addEventListener('click', function (e) {
             click(square);
+            if(isStarted==0)
+            {
+                isStarted=1;
+                timeStart();
+            }
         })
 
         square.oncontextmenu = function (e) {
             e.preventDefault();
             addFlag(square);
+            if(isStarted==0)
+            {
+                isStarted=1;
+                timeStart();
+            }
         }
 
 
@@ -75,7 +90,29 @@ function createBoard() {
 
 createBoard();
 
-//let match=0;
+let clock;
+
+function timeStart()
+{
+    const dateobj = new Date();
+    startTime = dateobj.getTime();
+    
+    clock = setInterval(timeUpdate,10);
+}
+
+function timeUpdate()
+{
+    if(isGameover) clearInterval(clock);
+    const dateobj2 = new Date();
+    curTime = dateobj2.getTime();
+    //console.log(curTime+' aaaa');
+    let timeInt = Math.floor((curTime-startTime)/1000);
+    let timeString = timeInt.toString();
+    if(timeInt<10) timeString = "00"+timeString;
+    else if(timeInt<100) timeString = '0'+timeString;
+    document.getElementById('timer').innerHTML = timeString; 
+}
+
 
 function click(square) {
     if (isGameover == 1) return;
@@ -148,7 +185,6 @@ function checkSquare(square, id) {
             //let newid = squares[parseInt(id-width)].id;
             let newid = id + width;
             let newsq = document.getElementById(newid);
-            console.log(newid + " " + newsq);
             click(newsq);
         }
         if (id - width >= 0 && leftborder == 0) {
@@ -215,11 +251,16 @@ function addFlag(square) {
             flag++;
             //checkWin();
         }
-        else {
+        else  if(square.classList.contains('flag'))
+        {
             square.classList.remove('flag');
             square.innerHTML = '';
             flag--;
         }
+        let rembomb = bombamount-flag;
+        if( rembomb<10) document.getElementById('flagcounter').innerHTML = '0'+rembomb;
+        else document.getElementById('flagcounter').innerHTML = rembomb;
+
     }
 }
 
@@ -235,16 +276,21 @@ function checkWin() {
             alert('Win');
         }, 400);
         isGameover = 1;
+        firebasestore();
     }
 }
 
 
 
-//custom made sleep as js don't have any :)
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
+function firebasestore()
+{
+    firebase.database().ref('curtime/' + curTime).set({
+        curTime : Math.floor((curTime-startTime)/1000)
+      }, function (error) {
+        if (error) {
+          // The write failed...
+        } else {
+          console.log('done');
+        }
+      });
 }

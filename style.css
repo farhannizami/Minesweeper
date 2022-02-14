@@ -61,7 +61,7 @@
 {
     
     width:420px;
-    height:420px;
+    height:480px;
 
     /* The magic centering code */
     margin:auto;
@@ -75,6 +75,20 @@
     overflow:auto;
 }
 
+.gametopbar
+{
+    height: 60px;
+    width: 420px;
+    background-color: rgb(74,117,44);
+}
+
+.gamehead
+{
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 450px) {
     .gridgg
     {
@@ -84,13 +98,18 @@
     .centerdiv
     {
         width:350px;
-        height:350px;
+        height:400px;
 
     }
     .cell
     {
         height: 35px;
         width: 35px;
+    }
+    .gametopbar
+    {
+        height: 0px;
+        width: 350px;
     }
   }
   
