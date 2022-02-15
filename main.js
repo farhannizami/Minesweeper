@@ -233,7 +233,7 @@ function gameOver(square) {
                 let ind = Math.floor(Math.random() * 7);
 
                 document.getElementById(squares[i].getAttribute('id')).style.backgroundColor = colorsbomb[ind];
-                document.getElementById(squares[i].getAttribute('id')).style.borderColor = colorsbomb[ind];
+                // document.getElementById(squares[i].getAttribute('id')).style.borderColor = colorsbomb[ind];
             }, bn * 250);
         }
     }
@@ -267,7 +267,7 @@ function addFlag(square) {
 function checkWin() {
     let match = 0;
     for (let i = 0; i < squares.length; i++) {
-        if (squares[i].classList.contains('checked')) {
+        if (squares[i].classList.contains('checked') && !squares[i].classList.contains('bomb')) {
             match++;
         }
     }

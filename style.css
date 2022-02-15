@@ -14,9 +14,9 @@
     height: 42px;
     width: 42px;
     /* background-color: red; */
-    border-style: solid;
+    /* border-style: solid;
     border-width: 1px;
-    border-color: black;
+    border-color: black; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,23 +28,23 @@
 .odd
 {
     background-color: rgb(162,209,73);
-    border-color:rgb(162,209,73);
+    /* border-color:rgb(162,209,73); */
 }
 .even
 {
     background-color: rgb(170,215,81);
-    border-color: rgb(170,215,81);
+    /* border-color: rgb(170,215,81); */
 }
 
 .even.checked
 {
     background-color: rgb(229,194,159);
-    border-color: rgb(229,194,159);
+    /* border-color: rgb(229,194,159); */
 }
 .odd.checked
 {
     background-color: rgb(215,184,153);
-    border-color: rgb(215,184,153);
+    /* border-color: rgb(215,184,153); */
 }
 
 .bomb
@@ -98,7 +98,7 @@
     .centerdiv
     {
         width:350px;
-        height:400px;
+        height:410px;
 
     }
     .cell
@@ -108,7 +108,7 @@
     }
     .gametopbar
     {
-        height: 0px;
+        height: 60px;
         width: 350px;
     }
   }
