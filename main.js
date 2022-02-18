@@ -294,3 +294,21 @@ function firebasestore()
         }
       });
 }
+
+
+$('#play-tab').click(function(){
+    //alert('a');
+    setTimeout(()=>{
+    document.getElementById('myTabContent').classList.add('d-flex');
+    document.getElementById('myTabContent').classList.add('justify-content-center');
+    document.getElementById('myTabContent').classList.add('align-items-center');
+    },150);
+});
+$('#leaderboard-tab').click(function()
+{
+    setTimeout(()=>{
+    document.getElementById('myTabContent').classList.remove('d-flex');
+    document.getElementById('myTabContent').classList.remove('justify-content-center');
+    document.getElementById('myTabContent').classList.remove('align-items-center');
+    },150);
+});

@@ -1,3 +1,40 @@
+
+/* Navbar and tabs */
+.navbar
+{
+    background-color: rgb(74,117,44);
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active 
+{
+    color: rgb(74,117,44) !important;
+    border-color: white white rgb(162,209,73) white !important;
+    border-bottom-width: 4px !important;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link
+{
+    border-color: white white white white!important;
+    border-bottom-width: 4px !important;
+    color: black;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover
+{
+    color: rgb(162,209,73);
+}
+
+
+/* Game Box */
+.gametab
+{
+    min-height: calc(100vh - 99.6px) !important;
+}
+.gamename
+{
+    color: white !important;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+}
 .gridgg
 {
     height: 420px;
@@ -7,8 +44,6 @@
     /*background-color: grey;*/
     /* background-color: rgb(170,215,81); */
 }
-
-
 .cell
 {
     height: 42px;
@@ -89,6 +124,8 @@
     font-weight: 600;
 }
 
+
+/* Media query  */
 @media only screen and (max-width: 450px) {
     .gridgg
     {
