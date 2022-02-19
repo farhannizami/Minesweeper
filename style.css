@@ -8,8 +8,13 @@
 {
     color: rgb(74,117,44) !important;
     border-color: white white rgb(162,209,73) white !important;
+    border-radius: 3px;
     border-bottom-width: 4px !important;
     font-weight: 500;
+}
+.nav-tabs
+{
+    border-bottom: 0 !important;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link
@@ -149,4 +154,25 @@
         width: 350px;
     }
   }
+
+
+  /* Modal Box */
+  .play-again
+  {
+      background-color: rgb(74,117,44) !important;
+      color: white !important;
+  }
+  .play-again:hover
+  {
+      opacity: 0.8;
+  }
   
+  .submit
+  {
+    background-color: rgb(74,117,44) !important;
+    color: white !important;
+  }
+  .submit:hover
+  {
+      opacity: 0.8;
+  }

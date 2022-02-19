@@ -4,10 +4,11 @@ let squares = [];
 let bombamount = 15;
 let isGameover = 0;
 let flag = 0;
+let dateplayed;
 
-let colorsbomb = ['red', 'green', 'blue', 'orange', 'yellow', 'purple','cyan'];
+let colorsbomb = ['red', 'green', 'blue', 'orange', 'yellow', 'purple', 'cyan'];
 
-let isStarted=0;
+let isStarted = 0;
 let startTime;
 let curTime;
 
@@ -39,19 +40,18 @@ function createBoard() {
 
         square.addEventListener('click', function (e) {
             click(square);
-            if(isStarted==0)
-            {
-                isStarted=1;
+            if (isStarted == 0) {
+                isStarted = 1;
                 timeStart();
+                dateplayed = new Date().toString();
             }
         })
 
         square.oncontextmenu = function (e) {
             e.preventDefault();
             addFlag(square);
-            if(isStarted==0)
-            {
-                isStarted=1;
+            if (isStarted == 0) {
+                isStarted = 1;
                 timeStart();
             }
         }
@@ -92,25 +92,23 @@ createBoard();
 
 let clock;
 
-function timeStart()
-{
+function timeStart() {
     const dateobj = new Date();
     startTime = dateobj.getTime();
-    
-    clock = setInterval(timeUpdate,10);
+
+    clock = setInterval(timeUpdate, 10);
 }
 
-function timeUpdate()
-{
-    if(isGameover) clearInterval(clock);
+function timeUpdate() {
+    if (isGameover) clearInterval(clock);
     const dateobj2 = new Date();
     curTime = dateobj2.getTime();
     //console.log(curTime+' aaaa');
-    let timeInt = Math.floor((curTime-startTime)/1000);
+    let timeInt = Math.floor((curTime - startTime) / 1000);
     let timeString = timeInt.toString();
-    if(timeInt<10) timeString = "00"+timeString;
-    else if(timeInt<100) timeString = '0'+timeString;
-    document.getElementById('timer').innerHTML = timeString; 
+    if (timeInt < 10) timeString = "00" + timeString;
+    else if (timeInt < 100) timeString = '0' + timeString;
+    document.getElementById('timer').innerHTML = timeString;
 }
 
 
@@ -237,8 +235,10 @@ function gameOver(square) {
             }, bn * 250);
         }
     }
-    setTimeout(() => { alert("game over"); }
-        , bombamount * 250);
+    setTimeout(() => {
+        //alert("game over");
+        $('#gameover-modal').modal('show');
+    }, bombamount * 250);
 
 }
 
@@ -251,14 +251,13 @@ function addFlag(square) {
             flag++;
             //checkWin();
         }
-        else  if(square.classList.contains('flag'))
-        {
+        else if (square.classList.contains('flag')) {
             square.classList.remove('flag');
             square.innerHTML = '';
             flag--;
         }
-        let rembomb = bombamount-flag;
-        if( rembomb<10) document.getElementById('flagcounter').innerHTML = '0'+rembomb;
+        let rembomb = bombamount - flag;
+        if (rembomb < 10) document.getElementById('flagcounter').innerHTML = '0' + rembomb;
         else document.getElementById('flagcounter').innerHTML = rembomb;
 
     }
@@ -273,42 +272,66 @@ function checkWin() {
     }
     if (match == width * width - bombamount) {
         setTimeout(() => {
-            alert('Win');
+            $('#win-modal').modal('show');
+            document.getElementById('win-time').innerHTML = Math.floor((curTime - startTime) / 1000);
         }, 400);
         isGameover = 1;
-        firebasestore();
+        // firebasestore();
     }
 }
 
-
-
-function firebasestore()
-{
-    firebase.database().ref('curtime/' + curTime).set({
-        curTime : Math.floor((curTime-startTime)/1000)
-      }, function (error) {
-        if (error) {
-          // The write failed...
-        } else {
-          console.log('done');
+$('.submit').click(
+    function () {
+        let name = document.getElementById('name').value;
+        console.log(name);
+        if (name != '') {
+            firebasestore(name);
+            setTimeout(()=>
+            {
+                location.reload();
+            },2300);
         }
-      });
+    }
+);
+
+// function win() {
+//     $('#win-modal').modal('show');
+//     document.getElementById('win-time').innerHTML = Math.floor((curTime - startTime) / 1000);
+//     isGameover = 1;
+// }
+
+
+function firebasestore(name) {
+    firebase.database().ref('leaderboard/' + name + ' time' + startTime).set({
+        Time: Math.floor((curTime - startTime) / 1000),
+        Dateplayed: dateplayed
+    }, function (error) {
+        if (error) {
+            // The write failed...
+        } else {
+            console.log('done');
+        }
+    });
 }
 
 
-$('#play-tab').click(function(){
+
+// Nav tab navigation
+$('#play-tab').click(function () {
     //alert('a');
-    setTimeout(()=>{
-    document.getElementById('myTabContent').classList.add('d-flex');
-    document.getElementById('myTabContent').classList.add('justify-content-center');
-    document.getElementById('myTabContent').classList.add('align-items-center');
-    },150);
+    setTimeout(() => {
+        document.getElementById('myTabContent').classList.add('d-flex');
+        document.getElementById('myTabContent').classList.add('justify-content-center');
+        document.getElementById('myTabContent').classList.add('align-items-center');
+    }, 150);
 });
-$('#leaderboard-tab').click(function()
-{
-    setTimeout(()=>{
-    document.getElementById('myTabContent').classList.remove('d-flex');
-    document.getElementById('myTabContent').classList.remove('justify-content-center');
-    document.getElementById('myTabContent').classList.remove('align-items-center');
-    },150);
+$('#leaderboard-tab').click(function () {
+    setTimeout(() => {
+        document.getElementById('myTabContent').classList.remove('d-flex');
+        document.getElementById('myTabContent').classList.remove('justify-content-center');
+        document.getElementById('myTabContent').classList.remove('align-items-center');
+    }, 150);
+});
+$('.play-again').click(function () {
+    location.reload();
 });

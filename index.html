@@ -110,7 +110,52 @@
   </div>
 
 
+  <!-- Button trigger modal -->
 
+<!-- Game Over Modal -->
+<div class="modal fade" id="gameover-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="staticBackdropLabel">Game Over</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <!-- <div class="modal-body">
+        Game Over
+      </div> -->
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn play-again"><i class="bi bi-arrow-clockwise" style="margin-right: 10px;"></i>Try Again</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button onclick="win()">jitsiiiii</button> -->
+<!--Win Modal -->
+<div class="modal fade" id="win-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Congratulations</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+
+        <span style="font-weight: 600;">Time Taken :</span> <span id = 'win-time'>000</span> seconds
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label" style="font-weight: 600;">Enter Your Name:</label>
+          <input type="email" class="form-control" id="name" aria-describedby="" required>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
   <script src="main.js"></script>
