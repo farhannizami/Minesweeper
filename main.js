@@ -286,10 +286,9 @@ $('.submit').click(
         console.log(name);
         if (name != '') {
             firebasestore(name);
-            setTimeout(()=>
-            {
+            setTimeout(() => {
                 location.reload();
-            },2300);
+            }, 2300);
         }
     }
 );
@@ -304,7 +303,8 @@ $('.submit').click(
 function firebasestore(name) {
     firebase.database().ref('leaderboard/' + name + ' time' + startTime).set({
         Time: Math.floor((curTime - startTime) / 1000),
-        Dateplayed: dateplayed
+        Dateplayed: dateplayed,
+        playername: name
     }, function (error) {
         if (error) {
             // The write failed...
@@ -330,8 +330,67 @@ $('#leaderboard-tab').click(function () {
         document.getElementById('myTabContent').classList.remove('d-flex');
         document.getElementById('myTabContent').classList.remove('justify-content-center');
         document.getElementById('myTabContent').classList.remove('align-items-center');
+        //leaderboardLoad();
     }, 150);
 });
 $('.play-again').click(function () {
     location.reload();
 });
+
+
+//Leaderboard make
+async function leaderboardLoad() {
+
+    //location.reload();
+    var allplayer = [];
+    // let individual = {time: 44 , name: "lol"};
+    // allplayer.push(individual);
+
+
+    await firebase.database().ref('leaderboard/').once('value').then(function (snapshot) {
+        snapshot.forEach(function (child) {
+            
+            let individual = { time: child.val().Time, name: child.val().playername };
+            // setTimeout(()=>{
+            allplayer.push(individual);
+
+            // },1000);
+            console.log(individual);
+        });
+    }, function (error) {
+        if (error) {
+        } else {
+
+        }
+    });
+    allplayer.sort(compare);
+    console.log(allplayer);
+
+    for (let i = 0; i < allplayer.length; i++) {
+        let dc = document.getElementById("playername").cloneNode(true);
+        dc.children[0].children[0].innerHTML = (i+1).toString()+".";
+        dc.children[0].children[1].innerHTML = allplayer[i].name;
+        dc.children[1].children[0].innerHTML = allplayer[i].time;
+        if(i==0)
+        {
+            dc.children[0].children[1].classList.add('firstplayer');
+            dc.children[0].children[1].classList.remove('noob');
+        } 
+        else if(i==1)
+        {
+            dc.children[0].children[1].classList.add('secondplayer');
+            dc.children[0].children[1].classList.remove('noob');
+        }
+        else if(i==2)
+        {
+            dc.children[0].children[1].classList.add('thirdplayer');
+            dc.children[0].children[1].classList.remove('noob');
+        }
+        document.getElementById('playerinfo').appendChild(dc);
+        dc.style.display = "flex";
+    }
+}
+
+function compare(a, b) {
+    return (a.time - b.time);
+}

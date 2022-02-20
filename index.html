@@ -53,7 +53,7 @@
 
 </script>
 
-<body>
+<body onload="leaderboardLoad()">
 
   <div class="" style="min-height: 100vh;">
 
@@ -61,7 +61,7 @@
       <nav class="navbar navbar-light ">
         <div class="container-fluid d-flex justify-content-center">
           <a class="navbar-brand gamename" href="index.html">
-            <img src="images/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
+            <img src="images/logo.png" alt="" width="40" height="40" class="d-inline-block align-text-top">
             Minesweeper
           </a>
         </div>
@@ -99,7 +99,23 @@
 
       </div>
       <div class="tab-pane fade" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard-tab">
-        <div class="container">Will be added letter
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6">
+              <h1 class="d-flex justify-content-center leaderhead">Leaderboard</h1>
+              <div class="playerinfo" id="playerinfo" style="margin-right: 10px; margin-left: 10px;">
+                <div class="row playername" id="playername" style="display: none;">
+                  <div class="col-8">
+                    <span class="serial">1</span> <span class="nameleader noob">Aluvorta</span>
+                  </div>
+                  <div class="col-4">
+                    <span class="timelead">50</span> seconds
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
