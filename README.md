@@ -3,8 +3,8 @@
 Classical Minesweeper with an extra "Leaderboard" feature
 
 
-![](images/playtab.png)
-![](images/leadertab.png)
+![](images/playtab.PNG)
+![](images/leadertab.PNG)
 
 Special thanks to Ania Kubow
 
