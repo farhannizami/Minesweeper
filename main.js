@@ -281,14 +281,15 @@ function checkWin() {
 }
 
 $('.submit').click(
-    function () {
+    async function () {
         let name = document.getElementById('name').value;
         console.log(name);
         if (name != '') {
-            firebasestore(name);
-            setTimeout(() => {
-                location.reload();
-            }, 2300);
+            await firebasestore(name);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2300);
+            location.reload();
         }
     }
 );
