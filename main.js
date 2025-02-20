@@ -356,7 +356,7 @@ async function leaderboardLoad() {
             allplayer.push(individual);
 
             // },1000);
-            console.log(individual);
+            // console.log(individual);
         });
     }, function (error) {
         if (error) {
@@ -365,7 +365,7 @@ async function leaderboardLoad() {
         }
     });
     allplayer.sort(compare);
-    console.log(allplayer);
+    // console.log(allplayer);
 
     for (let i = 0; i < allplayer.length; i++) {
         let dc = document.getElementById("playername").cloneNode(true);
