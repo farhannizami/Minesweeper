@@ -1,0 +1,42 @@
+@import '../style.css';
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.gamehead {
+  height: 60px;
+  gap: 8px;
+}
+
+.counter-value {
+  display: inline-block;
+  min-width: 3ch;
+  padding-left: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-wrap {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.cell {
+  border: 0;
+  padding: 0;
+}
+
+.cell:focus-visible {
+  outline: 3px solid #0d6efd;
+  outline-offset: -3px;
+}
+
+.play-again .bi {
+  margin-right: 10px;
+}
+
+.playerinfo {
+  margin-right: 10px;
+  margin-left: 10px;
+}
