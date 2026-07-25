@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /leaderboard/{scoreId} {
+      allow read: if true;
+      allow create: if isAnonymousUser()
+        && request.resource.data.keys().hasOnly(['playerName', 'timeSeconds', 'createdAt', 'uid'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.playerName is string
+        && request.resource.data.playerName.size() >= 1
+        && request.resource.data.playerName.size() <= 24
+        && request.resource.data.timeSeconds is int
+        && request.resource.data.timeSeconds >= 1
+        && request.resource.data.timeSeconds <= 999
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAnonymousUser() {
+      return request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+  }
+}
