@@ -100,6 +100,22 @@
     font-weight: 600;
 }
 
+.game-icon {
+    display: block;
+    object-fit: contain;
+}
+
+.game-icon-topbar {
+    width: 28px;
+    height: 28px;
+    margin-right: 6px;
+}
+
+.game-icon-cell {
+    width: min(72%, 30px);
+    height: min(72%, 30px);
+}
+
 
 /* Media query  */
 .difficulty-selector {

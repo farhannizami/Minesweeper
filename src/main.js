@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './style.css';
+import flagIconUrl from '../images/flag.svg';
 import { ensureAnonymousAuth } from './firebase.js';
 import { createGame } from './game.js';
 import { loadLeaderboard, submitScore } from './leaderboard.js';
@@ -11,6 +12,7 @@ const gameBox = document.querySelector('.gamebox');
 const selector = document.getElementById('difficulty-selector');
 const timerElement = document.getElementById('timer');
 const flagCounterElement = document.getElementById('flagcounter');
+document.getElementById('flag-icon').src = flagIconUrl;
 const playerInfo = document.getElementById('playerinfo');
 const nameInput = document.getElementById('name');
 const submitButton = document.querySelector('.submit');
