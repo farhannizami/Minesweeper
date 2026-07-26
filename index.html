@@ -37,6 +37,11 @@
 
     <div class="tab-content gametab d-flex justify-content-center align-items-center" id="myTabContent">
       <div class="tab-pane fade show active" id="play" role="tabpanel" aria-labelledby="play-tab">
+        <section class="difficulty-selector" id="difficulty-selector" aria-labelledby="difficulty-title">
+          <h1 id="difficulty-title">Choose a difficulty</h1>
+          <p>Pick a board, then clear every safe square.</p>
+          <div class="difficulty-options" id="difficulty-options"></div>
+        </section>
         <div class="gamebox">
           <div class="gametopbar">
             <div class="gamehead d-flex justify-content-center align-items-center">
@@ -48,6 +53,7 @@
               </span>
             </div>
           </div>
+          <button type="button" class="btn change-difficulty" id="change-difficulty">Change difficulty</button>
           <div class="gridgg" aria-label="Minesweeper board"></div>
         </div>
       </div>
@@ -57,6 +63,7 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6">
               <h1 class="d-flex justify-content-center leaderhead">Leaderboard</h1>
+              <ul class="nav nav-pills nav-fill difficulty-leaderboard-tabs" id="leaderboard-difficulty-tabs" role="tablist"></ul>
               <div class="playerinfo" id="playerinfo" aria-live="polite"></div>
             </div>
           </div>
@@ -88,6 +95,7 @@
         </div>
         <div class="modal-body">
           <p><span class="fw-semibold">Time Taken:</span> <span id="win-time">000</span> seconds</p>
+          <p><span class="fw-semibold">Difficulty:</span> <span id="win-difficulty"></span></p>
           <div class="mb-3">
             <label for="name" class="form-label fw-semibold">Enter Your Name:</label>
             <input type="text" class="form-control" id="name" maxlength="24" autocomplete="nickname" required>

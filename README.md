@@ -24,6 +24,8 @@ npm run emulators
 
 ## Firebase Security
 
-Leaderboard entries are stored in the Firestore `leaderboard` collection. Client writes require anonymous auth and are create-only. Rules validate the exact document shape and reject updates/deletes.
+Leaderboard entries are stored in the Firestore `leaderboard` collection. Each entry is tagged as `easy`, `medium`, or `hard`, so each difficulty has an independent leaderboard. Client writes require anonymous auth and are create-only. Rules validate the exact document shape and reject updates/deletes.
+
+The included Firestore index supports leaderboard queries by difficulty, time, and submission time. Deploy `firestore.indexes.json` with the rules before using the production leaderboard.
 
 For production, restrict the Firebase API key by HTTP referrer in Google Cloud and enable Firebase App Check enforcement after monitoring legitimate traffic.
