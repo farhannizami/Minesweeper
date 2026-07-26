@@ -1,6 +1,13 @@
-const MAX_SCORE_SECONDS = 999;
+import bombIconUrl from '../images/bomb.svg';
+import flagIconUrl from '../images/flag.svg';
+
+const MAX_SCORE_SECONDS = 99999;
 const BOMB_COLORS = ['red', 'green', 'blue', 'orange', 'yellow', 'purple', 'cyan'];
 const NUMBER_COLORS = ['gray', 'blue', 'darkgreen', 'red', 'purple', 'maroon', 'turquoise', 'black'];
+const GAME_ICON_PATHS = {
+  flag: flagIconUrl,
+  bomb: bombIconUrl,
+};
 
 export function createGame({ grid, timerElement, flagCounterElement, onWin, onLoss }) {
   let difficulty;
@@ -135,7 +142,7 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
       flagCount -= 1;
     } else if (flagCount < difficulty.mines) {
       square.classList.add('flag');
-      square.textContent = 'F';
+      setSquareIcon(square, 'flag');
       flagCount += 1;
     }
     flagCounterElement.textContent = String(difficulty.mines - flagCount).padStart(2, '0');
@@ -154,10 +161,19 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
   }
 
   function revealBomb(square) {
-    square.textContent = 'B';
+    setSquareIcon(square, 'bomb');
     square.style.backgroundColor = BOMB_COLORS[Math.floor(Math.random() * BOMB_COLORS.length)];
     square.classList.add('checked');
     square.disabled = true;
+  }
+
+  function setSquareIcon(square, iconName) {
+    const icon = document.createElement('img');
+    icon.className = 'game-icon game-icon-cell';
+    icon.src = GAME_ICON_PATHS[iconName];
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    square.replaceChildren(icon);
   }
 
   function checkWin() {

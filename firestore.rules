@@ -12,7 +12,7 @@ service cloud.firestore {
         && request.resource.data.playerName.size() <= 24
         && request.resource.data.timeSeconds is int
         && request.resource.data.timeSeconds >= 1
-        && request.resource.data.timeSeconds <= 999
+        && request.resource.data.timeSeconds <= 99999
         && request.resource.data.difficulty in ['easy', 'medium', 'hard']
         && request.resource.data.createdAt == request.time;
       allow update, delete: if false;
