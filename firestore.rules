@@ -5,7 +5,7 @@ service cloud.firestore {
     match /leaderboard/{scoreId} {
       allow read: if true;
       allow create: if isAnonymousUser()
-        && request.resource.data.keys().hasOnly(['playerName', 'timeSeconds', 'createdAt', 'uid'])
+        && request.resource.data.keys().hasOnly(['playerName', 'timeSeconds', 'difficulty', 'createdAt', 'uid'])
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.playerName is string
         && request.resource.data.playerName.size() >= 1
@@ -13,6 +13,7 @@ service cloud.firestore {
         && request.resource.data.timeSeconds is int
         && request.resource.data.timeSeconds >= 1
         && request.resource.data.timeSeconds <= 999
+        && request.resource.data.difficulty in ['easy', 'medium', 'hard']
         && request.resource.data.createdAt == request.time;
       allow update, delete: if false;
     }
