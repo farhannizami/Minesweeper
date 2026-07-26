@@ -1,7 +1,7 @@
 import bombIconUrl from '../images/bomb.svg';
 import flagIconUrl from '../images/flag.svg';
 
-const MAX_SCORE_SECONDS = 999;
+const MAX_SCORE_SECONDS = 99999;
 const BOMB_COLORS = ['red', 'green', 'blue', 'orange', 'yellow', 'purple', 'cyan'];
 const NUMBER_COLORS = ['gray', 'blue', 'darkgreen', 'red', 'purple', 'maroon', 'turquoise', 'black'];
 const GAME_ICON_PATHS = {
