@@ -19,6 +19,8 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
   let currentTime = 0;
   let clock;
   let pendingTimers = [];
+  let bombsGenerated = false;
+
 
   function start(nextDifficulty) {
     stopClock();
@@ -33,14 +35,12 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
     timerElement.textContent = '000';
     flagCounterElement.textContent = String(difficulty.mines).padStart(2, '0');
     grid.style.setProperty('--board-size', difficulty.size);
+    bombsGenerated = false;
     createBoard();
   }
 
   function createBoard() {
-    const cells = [
-      ...Array(difficulty.mines).fill('bomb'),
-      ...Array(difficulty.size * difficulty.size - difficulty.mines).fill('empty'),
-    ].sort(() => Math.random() - 0.5);
+    const cells = Array(difficulty.size * difficulty.size).fill('empty');
 
     grid.replaceChildren();
     cells.forEach((cellType, index) => {
@@ -52,6 +52,10 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
       square.classList.add(cellType, 'cell', (row + col) % 2 ? 'odd' : 'even');
       square.setAttribute('aria-label', `Cell ${row + 1}, ${col + 1}`);
       square.addEventListener('click', () => {
+        if (!bombsGenerated) {
+          generateBombs(index);
+        }
+
         startGameIfNeeded();
         reveal(index);
       });
@@ -63,13 +67,6 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
 
       grid.append(square);
       squares.push(square);
-    });
-
-    squares.forEach((square, index) => {
-      if (square.classList.contains('bomb')) return;
-      square.dataset.bombs = String(neighbors(index).filter((neighbor) => (
-        squares[neighbor].classList.contains('bomb')
-      )).length);
     });
   }
 
@@ -184,6 +181,43 @@ export function createGame({ grid, timerElement, flagCounterElement, onWin, onLo
     isGameOver = true;
     stopClock();
     onWin(Math.max(1, elapsedSeconds()), difficulty);
+  }
+
+  function generateBombs(firstIndex) {
+    const forbidden = new Set([
+      firstIndex,
+      ...neighbors(firstIndex),
+    ]);
+
+    const available = [];
+
+    for (let i = 0; i < difficulty.size * difficulty.size; i += 1) {
+      if (!forbidden.has(i)) {
+        available.push(i);
+      }
+    }
+
+    // Fisher-Yates shuffle
+    for (let i = available.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [available[i], available[j]] = [available[j], available[i]];
+    }
+
+    for (let i = 0; i < difficulty.mines; i += 1) {
+      squares[available[i]].classList.add('bomb');
+    }
+
+    squares.forEach((square, index) => {
+      if (square.classList.contains('bomb')) return;
+
+      square.dataset.bombs = String(
+        neighbors(index).filter((neighbor) =>
+          squares[neighbor].classList.contains('bomb')
+        ).length
+      );
+    });
+
+    bombsGenerated = true;
   }
 
   function stopClock() {
